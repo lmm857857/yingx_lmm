@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.lmm.dao.UserMapper">
+    <select id="selectManCountByCreateDate" resultType="com.baizhi.lmm.po.MonthAndSex">
+        select MONTH(create_date) month ,count(id) count
+        from yx_user
+        where sex='男'
+        group by MONTH(create_date)
+    </select>
+    <select id="selectWomanCountByCreateDate" resultType="com.baizhi.lmm.po.MonthAndSex">
+        select MONTH(create_date) month ,count(id) count
+        from yx_user
+        where sex='女'
+        group by MONTH(create_date)
+    </select>
+    <select id="selectManCountByCity" resultType="com.baizhi.lmm.po.City">
+       SELECT province name,count(id) value
+        from yx_user
+        where sex='男'
+        group by province
+    </select>
+    <select id="selectWomanCountByCity" resultType="com.baizhi.lmm.po.City">
+       SELECT province name,count(id) value
+        from yx_user
+        where sex='女'
+        group by province
+    </select>
+
+</mapper>

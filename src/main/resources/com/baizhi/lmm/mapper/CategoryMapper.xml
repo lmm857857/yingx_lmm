@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.lmm.dao.CategoryMapper">
+
+
+    <select id="quertAllOne" resultType="com.baizhi.lmm.po.CategoryPo">
+        select c.id id,c.cate_name cateName,c.levels levels,c.parent_id parentId
+        from yx_category c where levels='1'
+    </select>
+    <select id="quertAllTwo" resultType="com.baizhi.lmm.po.CategoryPo">
+        select c.id id,c.cate_name cateName,c.levels levels,c.parent_id parentId
+        from yx_category c where parent_id=#{parentId}
+    </select>
+
+
+
+    <!--   查询该一级类别下共有多少条二级类别      -->
+    <select id="findAllSecondCount" resultType="java.lang.Integer">
+        select count(*)
+        from yx_category c
+        LEFT JOIN yx_category d on c.parent_id=d.id
+        where c.parent_id=#{parentId}
+    </select>
+</mapper>
